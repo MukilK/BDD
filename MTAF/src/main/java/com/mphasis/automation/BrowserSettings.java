@@ -99,18 +99,23 @@ public class BrowserSettings {
 					driver = new FirefoxDriver();
 					logger.debug("Firefox driver started without profiles");
 				}
+				System.out.println("Firefox");
 				break;
 			case IEXPLORE:
 				driver = new InternetExplorerDriver();
 				logger.debug("Internet Explorer driver started");
+				System.out.println("IE");
 				break;
 			case CHROME:
 				driver = new ChromeDriver(returnChromeCapabilities());
 				logger.debug("Chrome driver started.");
+				System.out.println("Chrome");
 				break;
 			default:
 				driver = new HtmlUnitDriver();
 				logger.debug("Defaulting to HTML Unit driver");
+				System.out.println("HTML Unit");
+				break;
 			}
 
 		} catch (Exception x) {
