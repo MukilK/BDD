@@ -72,6 +72,7 @@ public class BrowserSettings {
 	}
 
 	private supportedBrowsers getcurreBrowser() {
+		System.out.println(currentBrowser.toString());
 		return currentBrowser;
 	}
 
