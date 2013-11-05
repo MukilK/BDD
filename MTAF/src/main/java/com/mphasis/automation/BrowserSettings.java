@@ -112,7 +112,7 @@ public class BrowserSettings {
 				System.out.println("Chrome");
 				break;
 			default:
-				driver = new HtmlUnitDriver();
+				driver = new FirefoxDriver();
 				logger.debug("Defaulting to HTML Unit driver");
 				System.out.println("HTML Unit");
 				break;
