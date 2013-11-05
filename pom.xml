@@ -5,11 +5,14 @@
   <groupId>com.mphasis.MTAF</groupId>
   <artifactId>matfcore</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <packaging>jar</packaging>
+  <packaging>pom</packaging>
 
   <name>matfcore</name>
   <url>http://maven.apache.org</url>
-
+<modules>
+		<module>MTAF</module>
+		<module>mtaftests</module>
+	</modules>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
@@ -22,4 +25,20 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  	<build>
+		
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
 </project>
