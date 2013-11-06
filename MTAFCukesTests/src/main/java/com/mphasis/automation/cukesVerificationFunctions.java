@@ -1,6 +1,6 @@
 package com.mphasis.automation;
 
-import org.junit.*;
+import org.junit.Assert;
 
 public class cukesVerificationFunctions {
 
