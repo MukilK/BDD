@@ -6,14 +6,14 @@ import com.mphasis.automation.GlobalInit;
 
 public class HomePage extends GlobalInit {
 
-	private By lblUserID = By.id("nav-your-amazon");
+	private By lblSignInName = By.id("nav-signin-text");
 	private By lnkLogoff=By.id("nav-item-signout");
 	private By txtSearchBox=By.id("twotabsearchtextbox");
 	private By btnStartSearch=By.className("nav-submit-input");
 	
 	public String isUserLoggedIn(){
-		execEngine.waitforElement(lblUserID, 5);
-		return execEngine.getText(lblUserID);
+		execEngine.waitforElement(lblSignInName, 5);
+		return execEngine.getText(lblSignInName);
 	}
 	
 	public void logOff(){

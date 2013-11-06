@@ -52,7 +52,7 @@ public class loginStepdefs extends GlobalInit {
 	@Then("^User is logged in$")
 	public void User_is_logged_in() throws Throwable {
 		cukesVerificationFunctions.verifyEquals(
-				configuration.getString("welcome.user"),
+				configuration.getString("Hello.user"),
 				homePage.isUserLoggedIn());
 		homePage.logOff();
 	}
