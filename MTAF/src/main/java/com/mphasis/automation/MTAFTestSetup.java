@@ -5,27 +5,27 @@ import org.slf4j.LoggerFactory;
 
 import com.mphasis.automation.ApplicationInterface.DriverFunctions;
 
-public class MTAFTestSetupForCukes {
+public class MTAFTestSetup {
 
 	public static final Logger LOGGER = LoggerFactory
-			.getLogger(MTAFTestSetupForCukes.class);
+			.getLogger(MTAFTestSetup.class);
 	public  DriverFunctions execEngine;
 	public MTAFCore mtaf;
 	
-	private static MTAFTestSetupForCukes msfc=new MTAFTestSetupForCukes();
+	private static MTAFTestSetup msfc=new MTAFTestSetup();
 	
 	/**
 	 * Gets the cuke enabled webdriver to be used
 	 */
 
-	private MTAFTestSetupForCukes(){
+	private MTAFTestSetup(){
 		mtaf = new MTAFCore();
 		mtaf.initilize();
 		execEngine = mtaf.getExecutionEngine();
 		
 	}
 	
-	public static MTAFTestSetupForCukes getInstance( ) {
+	public static MTAFTestSetup getInstance( ) {
 	      return msfc;
 	   }
 	

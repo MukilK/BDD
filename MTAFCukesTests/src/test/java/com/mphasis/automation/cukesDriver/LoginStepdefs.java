@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import com.mphasis.amazonExample.PageObjects.HomePage;
 import com.mphasis.amazonExample.PageObjects.LoginPage;
 import com.mphasis.automation.GlobalInit;
-import com.mphasis.automation.CukesVerificationFunctions;
+import com.mphasis.automation.VerificationFunctions;
 
 import cucumber.api.java.en.Given;
 
@@ -52,7 +52,7 @@ public class LoginStepdefs extends GlobalInit {
 
 	@Then("^User is logged in$")
 	public void User_is_logged_in() throws Throwable {
-		CukesVerificationFunctions.verifyEquals(
+		VerificationFunctions.verifyEquals(
 				configuration.getString("Hello.user"),
 				homePage.isUserLoggedIn());
 		homePage.logOff();
@@ -68,7 +68,7 @@ public class LoginStepdefs extends GlobalInit {
 	public void User_is_shown_There_was_a_problem_with_your_request_There_was_an_error_with_your_E_Mail_Password_combination_Please_try_again()
 			throws Throwable {
 
-		CukesVerificationFunctions.verifyEquals(
+		VerificationFunctions.verifyEquals(
 				configuration.getString("invalidloginattempt.message"),
 				loginPage.returnInvalidLoginMessage());
 

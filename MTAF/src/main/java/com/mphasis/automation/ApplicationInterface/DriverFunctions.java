@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
@@ -12,6 +13,7 @@ import org.slf4j.LoggerFactory;
 public class DriverFunctions {
 
 	private WebDriver driver;
+	private Actions builder;
 	public static final Logger logger = LoggerFactory
 			.getLogger(DriverFunctions.class);
 
@@ -30,6 +32,7 @@ public class DriverFunctions {
 
 	public void setDriver(WebDriver driver) {
 		this.driver = driver;
+		builder = new Actions(driver);
 	}
 
 	/**
@@ -228,6 +231,37 @@ public class DriverFunctions {
 		}
 	}
 
+	/**
+	 * Function to do mouse hover
+	 * 
+	 * @param moveToElementLocator
+	 *            : The web element locator, on which mouse hover is to be performed
+	 * 
+	 */
+
+	public void mouseHover(By moveToElementLocator) {
+		WebElement moveToElement = getElement(moveToElementLocator);
+		mouseHover(moveToElement );
+	}
+	
+	/**
+	 * Overloaded Function to do mouse hover
+	 * 
+	 * @param moveToElement
+	 *            : The web element object, on which mouse hover is to be performed
+	 * 
+	 */
+
+	public void mouseHover(WebElement moveToElement) {
+		try {
+			builder.moveToElement(moveToElement).build().perform();
+			logger.info("Mouse hover on element"+moveToElement.toString());
+		} catch (Exception ex) {
+			logger.error("Error while trying to move mouse over "
+					+ moveToElement.toString() + ": {}", ex.getMessage());
+		}
+	}
+	
 	/**
 	 * Returns the webelement object when a lcoator is passed
 	 * 

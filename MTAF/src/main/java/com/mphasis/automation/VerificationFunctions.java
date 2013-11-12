@@ -2,7 +2,7 @@ package com.mphasis.automation;
 
 import org.junit.Assert;
 
-public class cukesVerificationFunctions {
+public class VerificationFunctions {
 
 	public static void verifyEquals(String expected, String actual) {
 
