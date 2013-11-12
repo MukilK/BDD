@@ -1,5 +1,7 @@
 package com.mphasis.automation;
 
+import mx4j.log.Logger;
+
 import org.junit.Assert;
 
 public class VerificationFunctions {
