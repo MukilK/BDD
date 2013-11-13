@@ -1,0 +1,13 @@
+<story path="Search.story" title="">
+<narrative keyword="Narrative:">
+  <inOrderTo keyword="In order to">ensure that a user can search for Items</inOrderTo>
+  <asA keyword="As a">n user</asA>
+  <iWantTo keyword="I want to">search for a popular item</iWantTo>
+</narrative>
+<scenario keyword="Scenario:" title="Search for a popular item returns more than 1 results">
+<step outcome="successful">Given a valid user</step>
+<step outcome="successful">When user enters credentials and click submit</step>
+<step outcome="successful">And user searches for <parameter>gps</parameter></step>
+<step outcome="successful">Then more than one result is shown</step>
+</scenario>
+</story>
