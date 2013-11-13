@@ -117,10 +117,22 @@
 							<metaFilters>
 								<metaFilter></metaFilter>
 							</metaFilters>
+							<artifactItems>
+								<artifactItem>
+									<groupId>org.jbehave.site</groupId>
+									<artifactId>jbehave-site-resources</artifactId>
+									<version>3.1.1</version>
+									<type>zip</type>
+									<outputDirectory> ${project.build.directory}/jbehave/view</outputDirectory>
+								</artifactItem>
+							</artifactItems>
+
 						</configuration>
 						<goals>
 							<goal>run-stories-as-embeddables</goal>
 						</goals>
+
+
 					</execution>
 				</executions>
 				<dependencies>
