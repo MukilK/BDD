@@ -1,6 +1,7 @@
 package com.mphasis.automation;
 
 import java.util.Iterator;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
@@ -9,7 +10,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.slf4j.Logger;
@@ -27,16 +27,20 @@ public class BrowserSettings {
 	private supportedBrowsers currentBrowser;
 	public static final Logger logger = LoggerFactory
 			.getLogger(BrowserSettings.class);
-	private static String browerConfigPropertiesFile = "BrowserConfig.properties";
-	Configuration configuration;
+	
+	private static String globalConfigPropertiesFile = "GlobalConfig.properties";
+	Configuration globalConfiguration;
 
 	public BrowserSettings() throws UnSupportedBrowserException,
 			ConfigurationException {
 
-		this((new PropertiesConfiguration(browerConfigPropertiesFile))
+		this((new PropertiesConfiguration(globalConfigPropertiesFile))
 				.getString("current.browser"));
-		//configuration is instantiated here since it throws an error & needs to be handled.
-		configuration = new PropertiesConfiguration(browerConfigPropertiesFile);
+		// configuration is instantiated here since it throws an error & needs
+		// to be handled.
+		
+		globalConfiguration = new PropertiesConfiguration(
+				globalConfigPropertiesFile);
 	}
 
 	/**
@@ -102,7 +106,7 @@ public class BrowserSettings {
 				System.out.println("Firefox");
 				break;
 			case IEXPLORE:
-				driver = new InternetExplorerDriver();
+				driver = new InternetExplorerDriver(returnIECapabilities());
 				logger.debug("Internet Explorer driver started");
 				System.out.println("IE");
 				break;
@@ -125,6 +129,15 @@ public class BrowserSettings {
 
 			return null;
 		}
+		driver.manage()
+				.timeouts()
+				.implicitlyWait(globalConfiguration.getInt("global.timeout"),
+						TimeUnit.SECONDS);
+		if (globalConfiguration.getBoolean("window.maximized")){
+			driver.manage().window().maximize();	
+		}
+		
+		
 		return driver;
 	}
 
@@ -132,15 +145,29 @@ public class BrowserSettings {
 			throws ConfigurationException {
 		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 		System.setProperty("webdriver.chrome.driver",
-				configuration.getString("ChromeDriver.location"));
-		capabilities.setCapability("chrome.binary",
-				configuration.getString("ChromeBin.location"));
+				globalConfiguration.getString("ChromeDriver.location"));
+		if (globalConfiguration.containsKey("ChromeBin.location")
+				&& !globalConfiguration.getString("ChromeBin.location")
+						.equals("")) {
+			capabilities.setCapability("chrome.binary",
+					globalConfiguration.getString("ChromeBin.location"));
+		}
+
+		return capabilities;
+	}
+
+	private DesiredCapabilities returnIECapabilities()
+			throws ConfigurationException {
+		DesiredCapabilities capabilities = DesiredCapabilities
+				.internetExplorer();
+		System.setProperty("webdriver.ie.driver",
+				globalConfiguration.getString("ieDriver.location"));
 		return capabilities;
 	}
 
 	private FirefoxProfile returnFirefoxProfile() throws ConfigurationException {
 		FirefoxProfile fp;
-		Iterator<Configuration> keys = configuration.getKeys();
+		Iterator<Configuration> keys = globalConfiguration.getKeys();
 		if (!keys.hasNext()) {
 			fp = null;
 		} else {

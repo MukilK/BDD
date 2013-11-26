@@ -1,6 +1,20 @@
 package com.mphasis.automation.ApplicationInterface;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -235,33 +249,35 @@ public class DriverFunctions {
 	 * Function to do mouse hover
 	 * 
 	 * @param moveToElementLocator
-	 *            : The web element locator, on which mouse hover is to be performed
+	 *            : The web element locator, on which mouse hover is to be
+	 *            performed
 	 * 
 	 */
 
 	public void mouseHover(By moveToElementLocator) {
 		WebElement moveToElement = getElement(moveToElementLocator);
-		mouseHover(moveToElement );
+		mouseHover(moveToElement);
 	}
-	
+
 	/**
 	 * Overloaded Function to do mouse hover
 	 * 
 	 * @param moveToElement
-	 *            : The web element object, on which mouse hover is to be performed
+	 *            : The web element object, on which mouse hover is to be
+	 *            performed
 	 * 
 	 */
 
 	public void mouseHover(WebElement moveToElement) {
 		try {
 			builder.moveToElement(moveToElement).build().perform();
-			logger.info("Mouse hover on element"+moveToElement.toString());
+			logger.info("Mouse hover on element" + moveToElement.toString());
 		} catch (Exception ex) {
 			logger.error("Error while trying to move mouse over "
 					+ moveToElement.toString() + ": {}", ex.getMessage());
 		}
 	}
-	
+
 	/**
 	 * Returns the webelement object when a lcoator is passed
 	 * 
@@ -274,4 +290,24 @@ public class DriverFunctions {
 		return driver.findElement(locator);
 	}
 
+	public byte[] getscreenShot() throws IOException {
+
+		return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+//		DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+//		Date date = new Date();
+//		System.out.println(dateFormat.format(date));
+//		File temp = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+//		FileUtils.copyFile(temp, new File(dateFormat.format(date)));
+//		InputStream screenshotStream = null;
+//		try {
+//			screenshotStream = new FileInputStream(temp);
+//
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return IOUtils.toByteArray(screenshotStream);
+		
+		
+	}
 }
