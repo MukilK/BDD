@@ -1,6 +1,5 @@
 package mtaf.concordion.concordiontests;
 
-import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.concordion.integration.junit4.ConcordionRunner;
