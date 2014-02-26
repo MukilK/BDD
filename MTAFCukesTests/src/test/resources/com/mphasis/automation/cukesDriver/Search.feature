@@ -1,3 +1,4 @@
+@ff @chrome
 Feature: User should be able to search for Items
 
   Scenario: Search for a popular item returns more than 1 results
