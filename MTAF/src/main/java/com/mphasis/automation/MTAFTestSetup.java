@@ -15,7 +15,7 @@ public class MTAFTestSetup {
 	private static MTAFTestSetup msfc=new MTAFTestSetup();
 	
 	/**
-	 * Gets the cuke enabled webdriver to be used
+	 * Gets the webdriver to be used
 	 */
 
 	private MTAFTestSetup(){
