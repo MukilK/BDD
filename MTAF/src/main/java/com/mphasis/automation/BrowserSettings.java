@@ -21,7 +21,7 @@ public class BrowserSettings {
 
 	public enum supportedBrowsers {
 
-		CHROME, FIREFOX, IEXPLORE, HTMLUNIT
+		CHROME, FIREFOX, IEXPLORE, HTMLUNIT,IPHONEIOS7
 	};
 
 	private supportedBrowsers currentBrowser;
@@ -96,8 +96,8 @@ public class BrowserSettings {
 		try {
 			switch (getcurreBrowser()) {
 			case FIREFOX:
-				if (returnFirefoxProfile() != null) {
-					driver = new FirefoxDriver(returnFirefoxProfile());
+				if (returnFirefoxProfile(null) != null) {
+					driver = new FirefoxDriver(returnFirefoxProfile(null));
 					logger.debug("PROFILE loaded Firefox driver started. ");
 				} else {
 					driver = new FirefoxDriver();
@@ -114,6 +114,16 @@ public class BrowserSettings {
 				driver = new ChromeDriver(returnChromeCapabilities());
 				logger.debug("Chrome driver started.");
 				System.out.println("Chrome");
+				break;
+			case IPHONEIOS7:
+				if (returnFirefoxProfile("IPHONEIOS7") != null) {
+					driver = new FirefoxDriver(returnFirefoxProfile("IPHONEIOS7"));
+					logger.debug("PROFILE loaded Firefox driver started. ");
+				} else {
+					driver = new FirefoxDriver();
+					logger.debug("Firefox driver started without profiles");
+				}
+				System.out.println("Firefox");
 				break;
 			default:
 				driver = new FirefoxDriver();
@@ -165,18 +175,33 @@ public class BrowserSettings {
 		return capabilities;
 	}
 
-	private FirefoxProfile returnFirefoxProfile() throws ConfigurationException {
+	private FirefoxProfile returnFirefoxProfile(String deviceBrowser) throws ConfigurationException {
 		FirefoxProfile fp;
+
 		Iterator<Configuration> keys = globalConfiguration.getKeys();
 		if (!keys.hasNext()) {
 			fp = null;
 		} else {
-
-			// TODO Add Logic for handling profile
-
 			fp = new FirefoxProfile();
+				if (!deviceBrowser.equals(null)){
+					fp.setPreference("general.useragent.override", returnUserAgentString(deviceBrowser));
+				}
+			
+
 		}
 		return fp;
+
+	}
+
+	private String returnUserAgentString(String deviceBrowser) throws ConfigurationException {
+		
+		Iterator<Configuration> keys = globalConfiguration.getKeys();
+		if (!keys.hasNext()) {
+			return(null);
+		} else {
+			return(globalConfiguration.getString(deviceBrowser));
+		}
+		
 
 	}
 }
