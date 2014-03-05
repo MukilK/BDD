@@ -62,7 +62,7 @@ public class BrowserSettings {
 				return;
 			}
 		}
-		throw new UnSupportedBrowserException();
+		throw new UnSupportedBrowserException(browser);
 	}
 
 	/**
