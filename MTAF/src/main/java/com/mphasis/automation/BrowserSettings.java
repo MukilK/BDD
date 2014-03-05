@@ -54,7 +54,7 @@ public class BrowserSettings {
 	 * 
 	 */
 	private BrowserSettings(String browser) throws UnSupportedBrowserException {
-		logger.debug("BrowserSettings Constructor.");
+		logger.debug("BrowserSettings Constructor. - Browser Selected " + browser);
 
 		for (supportedBrowsers sBrowser : supportedBrowsers.values()) {
 			if (sBrowser.toString().toLowerCase().equals(browser.toLowerCase())) {
