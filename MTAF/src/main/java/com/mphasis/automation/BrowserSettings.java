@@ -176,14 +176,15 @@ public class BrowserSettings {
 	}
 
 	private FirefoxProfile returnFirefoxProfile(String deviceBrowser) throws ConfigurationException {
-		FirefoxProfile fp;
+		FirefoxProfile fp=null;
 
 		Iterator<Configuration> keys = globalConfiguration.getKeys();
 		if (!keys.hasNext()) {
 			fp = null;
 		} else {
-			fp = new FirefoxProfile();
+			
 				if (!deviceBrowser.equals(null)){
+					fp = new FirefoxProfile();
 					fp.setPreference("general.useragent.override", returnUserAgentString(deviceBrowser));
 				}
 			
