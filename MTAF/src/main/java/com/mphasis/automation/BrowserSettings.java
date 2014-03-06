@@ -180,10 +180,10 @@ public class BrowserSettings {
 
 		Iterator<Configuration> keys = globalConfiguration.getKeys();
 		if (!keys.hasNext()) {
-			fp = null;
+			
 		} else {
 			
-				if (!deviceBrowser.equals(null)){
+				if (deviceBrowser!=null){
 					fp = new FirefoxProfile();
 					fp.setPreference("general.useragent.override", returnUserAgentString(deviceBrowser));
 				}
