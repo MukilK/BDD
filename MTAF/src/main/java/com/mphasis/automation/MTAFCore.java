@@ -20,12 +20,26 @@ public class MTAFCore {
 	protected BrowserSettings browserSettings;
 	public DriverFunctions execEngine;
 	protected Actions builder;
-	private WebDriver driver;
+	private static WebDriver driver;
 
 	public MTAFCore() {
 
 	}
 
+	
+	 private static final Thread CLOSE_THREAD = new Thread() {
+	        @Override
+	        public void run() {
+	            driver.close();
+	            driver.quit();
+	        }
+	    };
+
+	    static {
+	        Runtime.getRuntime().addShutdownHook(CLOSE_THREAD);
+	    }
+	
+	
 	public void initilize() {
 		try {
 			browserSettings = new BrowserSettings();
