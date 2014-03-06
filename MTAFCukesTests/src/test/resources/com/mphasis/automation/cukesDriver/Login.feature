@@ -1,4 +1,5 @@
-@chrome
+@ff
+
 Feature: A valid user should have access to Amazon
 
   Scenario: A valid user logging into amazon should be granted access
