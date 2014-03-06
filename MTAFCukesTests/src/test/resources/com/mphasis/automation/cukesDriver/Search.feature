@@ -1,4 +1,4 @@
-@chrome
+@ff
 
 Feature: User should be able to search for Items
 
@@ -6,4 +6,4 @@ Feature: User should be able to search for Items
     Given a valid user
     And user enters credentials and click submit
     When user searches for "GPS"
-    Then more than one result is shown    
+    Then more than one result is shown 
