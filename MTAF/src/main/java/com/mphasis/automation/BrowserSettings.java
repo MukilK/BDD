@@ -97,9 +97,11 @@ public class BrowserSettings {
 			switch (getcurreBrowser()) {
 			case FIREFOX:
 				if (returnFirefoxProfile(null) != null) {
+					logger.debug("Loading Firefox driver with profiles.");
 					driver = new FirefoxDriver(returnFirefoxProfile(null));
 					logger.debug("PROFILE loaded Firefox driver started. ");
 				} else {
+					logger.debug("Loading Firefox driver without profiles.");
 					driver = new FirefoxDriver();
 					logger.debug("Firefox driver started without profiles");
 				}
