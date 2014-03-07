@@ -20,6 +20,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -211,6 +212,34 @@ public class DriverFunctions {
 
 	}
 
+	
+	/**
+	 * Sends text to a webelement specified by locator parameter
+	 * 
+	 * @param locator
+	 *            : Locator of the web element object to be clicked
+	 * @param text
+	 *            : Text to be send to given web element
+	 */
+
+	public void selectFromList(By locator, String text) {
+		WebElement dropDownElement = getElement(locator);
+		try {
+			Select dropdown = new Select(dropDownElement);
+			dropdown.selectByVisibleText(text);
+			logger.info("Selected  Item " + text + " from locator- "
+					+ locator.toString());
+		} catch (Exception ex) {
+			logger.error(
+					"Error while selecting " + text + " from drop down list - "
+							+ locator.toString() + ": {}", ex.getMessage());
+		}
+
+	}
+	
+	
+	
+	
 	/**
 	 * Clears the text in a given webelement
 	 * 
@@ -277,7 +306,7 @@ public class DriverFunctions {
 					+ moveToElement.toString() + ": {}", ex.getMessage());
 		}
 	}
-
+	
 	/**
 	 * Returns the webelement object when a lcoator is passed
 	 * 
