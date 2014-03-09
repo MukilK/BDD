@@ -1,4 +1,4 @@
-@ff
+@chrome
 
 Feature: A valid user should have access to Amazon
 

@@ -1,4 +1,4 @@
-@ff
+@chrome
 
 Feature: User should be able to search for Items
 
