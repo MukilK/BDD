@@ -30,8 +30,11 @@ public class MTAFCore {
 	 private static final Thread CLOSE_THREAD = new Thread() {
 	        @Override
 	        public void run() {
-	            driver.close();
-	            driver.quit();
+	        	if (driver!=null){
+	        		driver.close();
+		            driver.quit();	
+	        	}
+	            
 	        }
 	    };
 

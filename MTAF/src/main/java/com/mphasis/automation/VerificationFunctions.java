@@ -10,5 +10,16 @@ public class VerificationFunctions {
 
 		Assert.assertEquals(expected, actual);
 	}
+	
+	public static void verifyTrue(boolean actual) {
+
+		Assert.assertTrue(actual);
+	}
+	
+	public static void verifyFalse(boolean actual) {
+
+		Assert.assertTrue(actual);
+	}
+	
 
 }
