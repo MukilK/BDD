@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -16,29 +17,38 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.mphasis.automation.exceptions.UnSupportedBrowserException;
+import com.mphasis.automation.exceptions.UnsupportedBrowserDimension;
 
 public class BrowserSettings {
 
+	private final static String globalPropertyFileName = "GlobalConfig.properties";
+	private final static String propCurrentBrowser = "current.browser";
+	private final static String propWindowSizeForDevice = "device.type";
+	private final static String propvalueMaximized = "maximized";
+	private final static String propGlobalTimeOut = "global.timeout";
+	private final static String propSuffixScreen = "screen.";
+
 	public enum supportedBrowsers {
 
-		CHROME, FIREFOX, IEXPLORE, HTMLUNIT,IPHONEIOS7
+		CHROME, FIREFOX, IEXPLORE, HTMLUNIT, IPHONEIOS7
 	};
 
 	private supportedBrowsers currentBrowser;
+
 	public static final Logger logger = LoggerFactory
 			.getLogger(BrowserSettings.class);
-	
-	private static String globalConfigPropertiesFile = "GlobalConfig.properties";
+
+	private static String globalConfigPropertiesFile = globalPropertyFileName;
 	Configuration globalConfiguration;
 
 	public BrowserSettings() throws UnSupportedBrowserException,
 			ConfigurationException {
 
 		this((new PropertiesConfiguration(globalConfigPropertiesFile))
-				.getString("current.browser"));
+				.getString(propCurrentBrowser));
 		// configuration is instantiated here since it throws an error & needs
 		// to be handled.
-		
+
 		globalConfiguration = new PropertiesConfiguration(
 				globalConfigPropertiesFile);
 	}
@@ -54,7 +64,8 @@ public class BrowserSettings {
 	 * 
 	 */
 	private BrowserSettings(String browser) throws UnSupportedBrowserException {
-		logger.debug("BrowserSettings Constructor. - Browser Selected " + browser);
+		logger.debug("BrowserSettings Constructor. - Browser Selected "
+				+ browser);
 
 		for (supportedBrowsers sBrowser : supportedBrowsers.values()) {
 			if (sBrowser.toString().toLowerCase().equals(browser.toLowerCase())) {
@@ -75,7 +86,7 @@ public class BrowserSettings {
 		return currentBrowser.toString();
 	}
 
-	private supportedBrowsers getcurreBrowser() {
+	private supportedBrowsers getcurrentBrowser() {
 		System.out.println(currentBrowser.toString());
 		return currentBrowser;
 	}
@@ -90,11 +101,14 @@ public class BrowserSettings {
 	 * @param supportedBrowsers
 	 *            enumerator
 	 * @return
+	 * @throws UnSupportedBrowserException
+	 * @throws UnsupportedBrowserDimension
 	 */
-	public WebDriver returnBrowserDriver() {
+	public WebDriver returnBrowserDriver() throws UnSupportedBrowserException,
+			UnsupportedBrowserDimension {
 		WebDriver driver;
 		try {
-			switch (getcurreBrowser()) {
+			switch (getcurrentBrowser()) {
 			case FIREFOX:
 				if (returnFirefoxProfile(null) != null) {
 					logger.debug("Loading Firefox driver with profiles.");
@@ -118,8 +132,10 @@ public class BrowserSettings {
 				System.out.println("Chrome");
 				break;
 			case IPHONEIOS7:
+				// This option is with User Agent.
 				if (returnFirefoxProfile("IPHONEIOS7") != null) {
-					driver = new FirefoxDriver(returnFirefoxProfile("IPHONEIOS7"));
+					driver = new FirefoxDriver(
+							returnFirefoxProfile("IPHONEIOS7"));
 					logger.debug("PROFILE loaded Firefox driver started. ");
 				} else {
 					driver = new FirefoxDriver();
@@ -128,10 +144,12 @@ public class BrowserSettings {
 				System.out.println("Firefox");
 				break;
 			default:
-				driver = new FirefoxDriver();
-				logger.debug("Defaulting to HTML Unit driver");
-				System.out.println("HTML Unit");
-				break;
+				/*
+				 * driver = new FirefoxDriver();
+				 * logger.debug("Defaulting to HTML Unit driver");
+				 * System.out.println("HTML Unit"); break;
+				 */
+				throw new UnSupportedBrowserException(getCurrentBrowser());
 			}
 
 		} catch (Exception x) {
@@ -143,14 +161,34 @@ public class BrowserSettings {
 		}
 		driver.manage()
 				.timeouts()
-				.implicitlyWait(globalConfiguration.getInt("global.timeout"),
+				.implicitlyWait(globalConfiguration.getInt(propGlobalTimeOut),
 						TimeUnit.SECONDS);
-		if (globalConfiguration.getBoolean("window.maximized")){
-			driver.manage().window().maximize();	
+
+		String windowSizeForDevices = getPropWindowSize();
+
+		if (windowSizeForDevices.equals(propvalueMaximized)
+				|| windowSizeForDevices.equals("")) {
+			driver.manage().window().maximize();
+		} else {
+			String[] windowSize = windowSizeForDevices.split("x");
+			try {
+				Dimension sd = new Dimension(Integer.parseInt(windowSize[0]),
+						Integer.parseInt(windowSize[1]));
+				driver.manage().window().setSize(sd);
+			} catch (NumberFormatException ex) {
+				throw new UnsupportedBrowserDimension(windowSizeForDevices);
+			}
 		}
-		
-		
+
 		return driver;
+	}
+
+	private String getPropWindowSize() {
+
+		String deviceType = globalConfiguration
+				.getString(propWindowSizeForDevice);
+		return globalConfiguration.getString(propSuffixScreen + deviceType);
+
 	}
 
 	private DesiredCapabilities returnChromeCapabilities()
@@ -159,8 +197,8 @@ public class BrowserSettings {
 		System.setProperty("webdriver.chrome.driver",
 				globalConfiguration.getString("ChromeDriver.location"));
 		if (globalConfiguration.containsKey("ChromeBin.location")
-				&& !globalConfiguration.getString("ChromeBin.location")
-						.equals("")) {
+				&& !globalConfiguration.getString("ChromeBin.location").equals(
+						"")) {
 			capabilities.setCapability("chrome.binary",
 					globalConfiguration.getString("ChromeBin.location"));
 		}
@@ -177,34 +215,34 @@ public class BrowserSettings {
 		return capabilities;
 	}
 
-	private FirefoxProfile returnFirefoxProfile(String deviceBrowser) throws ConfigurationException {
-		FirefoxProfile fp=null;
+	private FirefoxProfile returnFirefoxProfile(String deviceBrowser)
+			throws ConfigurationException {
+		FirefoxProfile fp = null;
 
 		Iterator<Configuration> keys = globalConfiguration.getKeys();
 		if (!keys.hasNext()) {
-			
+
 		} else {
-			
-				if (deviceBrowser!=null){
-					fp = new FirefoxProfile();
-					fp.setPreference("general.useragent.override", returnUserAgentString(deviceBrowser));
-				}
-			
+
+			if (deviceBrowser != null) {
+				fp = new FirefoxProfile();
+				fp.setPreference("general.useragent.override",
+						returnUserAgentString(deviceBrowser));
+			}
 
 		}
 		return fp;
-
 	}
 
-	private String returnUserAgentString(String deviceBrowser) throws ConfigurationException {
-		
+	private String returnUserAgentString(String deviceBrowser)
+			throws ConfigurationException {
+
 		Iterator<Configuration> keys = globalConfiguration.getKeys();
 		if (!keys.hasNext()) {
-			return(null);
+			return (null);
 		} else {
-			return(globalConfiguration.getString(deviceBrowser));
+			return (globalConfiguration.getString(deviceBrowser));
 		}
-		
 
 	}
 }

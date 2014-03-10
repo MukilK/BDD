@@ -1,6 +1,8 @@
 package com.mphasis.automation;
 
+import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.PropertiesConfiguration;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.slf4j.Logger;
@@ -8,6 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mphasis.automation.ApplicationInterface.DriverFunctions;
 import com.mphasis.automation.exceptions.UnSupportedBrowserException;
+import com.mphasis.automation.exceptions.UnsupportedBrowserDimension;
 
 //import com.kohls.poc.gravity.customhandlers.handler;
 
@@ -22,8 +25,20 @@ public class MTAFCore {
 	protected Actions builder;
 	private static WebDriver driver;
 
+	private final static String globalPropertyFileName = "GlobalConfig.properties";
+	private static String globalConfigPropertiesFile = globalPropertyFileName;
+	private static String deviceType="device.type";
+	Configuration globalConfiguration;
+	
 	public MTAFCore() {
+		try {
+			globalConfiguration = new PropertiesConfiguration(
+					globalConfigPropertiesFile);
+		} catch (ConfigurationException e) {
 
+			System.out.println("Error while initialising Config file "
+					+ globalConfigPropertiesFile + " in MTAFTestSetup.");
+		}
 	}
 
 	
@@ -53,6 +68,8 @@ public class MTAFCore {
 		} catch (UnSupportedBrowserException e) {
 			// TODO Auto-generated catch block
 			logger.error("UnsupportedBrowserException : {} " + e.getMessage());
+		} catch (UnsupportedBrowserDimension e) {
+			logger.error("UnsupportedBrowserDimensionException : {} " + e.getMessage());
 		}
 
 	}
@@ -92,4 +109,7 @@ public class MTAFCore {
 		driver = null;
 	}
 
+	public String returnDeviceType() {
+		return globalConfiguration.getString(deviceType);
+	}
 }

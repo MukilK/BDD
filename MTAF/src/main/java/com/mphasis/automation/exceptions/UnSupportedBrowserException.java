@@ -1,8 +1,14 @@
 package com.mphasis.automation.exceptions;
 
-public class UnSupportedBrowserException extends Throwable{
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-	public UnSupportedBrowserException(String browser){
-		System.out.println("Unsupported Browser "+ browser);
+public class UnSupportedBrowserException extends Throwable {
+	public static final Logger logger = LoggerFactory
+			.getLogger(UnSupportedBrowserException.class);
+
+	public UnSupportedBrowserException(String browser) {
+		logger.error("Unsupported Browser " + browser);
+		System.out.println("Unsupported Browser " + browser);
 	}
 }
