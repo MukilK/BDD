@@ -2,7 +2,7 @@
 Feature: A user tries to complete flexapp without filling all mandatory fields
 
   Scenario: User Fills in all fields except Type of residence field
-    Given that user is on the FlexApp Credit card application page "Hello. Tell us about yourself."
+    Given that user is on the FlexApp Credit card application page "Tell us about yourself."
     And user enters valid data into all the mandatory fields in the Personal section
       | First Name | John           |
       | Initial    | Doe            |

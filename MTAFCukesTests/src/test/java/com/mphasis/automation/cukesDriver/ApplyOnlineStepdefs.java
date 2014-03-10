@@ -43,9 +43,9 @@ public class ApplyOnlineStepdefs extends GlobalInit {
 
 			logger.error("Error reading configuration " + e.getMessage());
 		}
-		personalPage = PageFactory.initElements(mtaf.returnDriverObject(),
+		personalPage = PageFactory.initElements(mtafCore.returnDriverObject(),
 				PersonalPage.class);
-		financialPage = PageFactory.initElements(mtaf.returnDriverObject(),
+		financialPage = PageFactory.initElements(mtafCore.returnDriverObject(),
 				FinancialPage.class);
 
 	}

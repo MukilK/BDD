@@ -33,9 +33,9 @@ public class LoginStepdefs extends GlobalInit {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		loginPage = PageFactory.initElements(mtaf.returnDriverObject(),
+		loginPage = PageFactory.initElements(mtafCore.returnDriverObject(),
 				LoginPage.class);
-		homePage = PageFactory.initElements(mtaf.returnDriverObject(),
+		homePage = PageFactory.initElements(mtafCore.returnDriverObject(),
 				HomePage.class);
 	}
 

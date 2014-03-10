@@ -18,7 +18,7 @@ import cucumber.api.java.Before;
 public class SetUpAndTearDown {
 
 	private DriverFunctions execEngine = MTAFTestSetup.getInstance().execEngine;
-	public MTAFCore mtafSingleton = MTAFTestSetup.getInstance().mtaf;
+	public MTAFCore mtafSingleton = MTAFTestSetup.getInstance().mtafCore;
 	public MTAFCore mtaf = new MTAFCore();
 	private static String commonDataProperties = "CommonData.properties";
 	static Configuration configuration;
