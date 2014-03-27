@@ -1,15 +1,16 @@
 package com.mphasis.amazonExample.PageObjects;
 
+import org.openqa.selenium.By;
+
 import com.mphasis.automation.GlobalInit;
-import com.mphasis.automation.webdriver.override.MTAFBy;
 
 public class HomePage extends GlobalInit {
 
-	private MTAFBy lblSignInName = (MTAFBy) MTAFBy.id("nav-signin-text");
-	private MTAFBy lnkLogoff = (MTAFBy) MTAFBy.id("nav-item-signout");
-	private MTAFBy txtSearchBox = (MTAFBy) MTAFBy.id("twotabsearchtextbox");
-	private MTAFBy btnStartSearch = (MTAFBy) MTAFBy.className("nav-submit-input");
-	private MTAFBy menuSignInTitle = (MTAFBy) MTAFBy.id("nav-signin-title");
+	private By lblSignInName = By.id("nav-signin-text");
+	private By lnkLogoff = By.id("nav-item-signout");
+	private By txtSearchBox = By.id("twotabsearchtextbox");
+	private By btnStartSearch = By.className("nav-submit-input");
+	private By menuSignInTitle = By.id("nav-signin-title");
 
 	public String isUserLoggedIn() {
 		execEngine.waitforElement(lblSignInName, 5);
