@@ -1,24 +1,23 @@
 package com.chase.ncj.PageObjects;
 
-import org.openqa.selenium.By;
-
 import com.mphasis.automation.GlobalInit;
+import com.mphasis.automation.webdriver.override.MTAFBy;
 
 public class PersonalPage extends GlobalInit {
 
-	private By txtFirstName = By.id("sFirstName");
-	private By txtMiddleInitial = By.id("sMiddleInitial");
-	private By txtLastName = By.id("sLastName");
-	private By lstSuffix = By.id("sSuffix");
-	private By txtAddressOne = By.id("sStreetAddr1");
-	private By txtAddressTwo = By.id("sStreetAddr2");
-	private By txtApartmentUnitNumber = By.id("sApartment");
-	private By txtCity = By.id("sCity");
-	private By lstState = By.id("sState1");
-	private By txtZip = By.id("sZip");
-	private By btnNext = By.id("next1");
-	private By bdyPersonalPage = By.tagName("body");
-	private By nodeAddAddressLine2 = By.id("add-address-line-2-trigger");
+	private MTAFBy txtFirstName =(MTAFBy) MTAFBy.id("sFirstName");
+	private MTAFBy txtMiddleInitial =(MTAFBy) MTAFBy.id("sMiddleInitial");
+	private MTAFBy txtLastName =(MTAFBy) MTAFBy.id("sLastName");
+	private MTAFBy lstSuffix =(MTAFBy) MTAFBy.id("sSuffix");
+	private MTAFBy txtAddressOne =(MTAFBy) MTAFBy.id("sStreetAddr1");
+	private MTAFBy txtAddressTwo =(MTAFBy) MTAFBy.id("sStreetAddr2");
+	private MTAFBy txtApartmentUnitNumber =(MTAFBy) MTAFBy.id("sApartment");
+	private MTAFBy txtCity =(MTAFBy) MTAFBy.id("sCity");
+	private MTAFBy lstState =(MTAFBy) MTAFBy.id("sState1");
+	private MTAFBy txtZip =(MTAFBy) MTAFBy.id("sZip");
+	private MTAFBy btnNext =(MTAFBy) MTAFBy.id("next1");
+	private MTAFBy bdyPersonalPage =(MTAFBy) MTAFBy.tagName("body");
+	private MTAFBy nodeAddAddressLine2 =(MTAFBy) MTAFBy.id("add-address-line-2-trigger");
 
 	public boolean isOnPersonalPage(String txtHeader) {
 

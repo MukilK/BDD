@@ -1,15 +1,14 @@
 package com.mphasis.amazonExample.PageObjects;
 
-import org.openqa.selenium.By;
-
 import com.mphasis.automation.GlobalInit;
+import com.mphasis.automation.webdriver.override.MTAFBy;
 
 public class LoginPage extends GlobalInit {
 
-	private By txtEmail = By.id("ap_email");
-	private By txtPassword = By.id("ap_password");
-	private By btnSignInUsingSecureServer = By.id("signInSubmit-input");
-	private By lblinvalidLoginAttemptMessage = By.id("message_error");
+	private MTAFBy txtEmail = (MTAFBy) MTAFBy.id("ap_email");
+	private MTAFBy txtPassword = (MTAFBy) MTAFBy.id("ap_password");
+	private MTAFBy btnSignInUsingSecureServer = (MTAFBy) MTAFBy.id("signInSubmit-input");
+	private MTAFBy lblinvalidLoginAttemptMessage = (MTAFBy) MTAFBy.id("message_error");
 
 	public void Login(String UserName, String Pwd) {
 		execEngine.sendText(txtEmail, UserName);
