@@ -72,9 +72,10 @@ public class DriverFunctions {
 
 	public void navigateToUrl(String URL, Object objectInPage, int timeOut)
 			throws TimeoutException {
-
+		System.out.println("Open URL: " + URL);
 		driver.get(URL);
 		logger.info("Open URL: " + URL);
+		
 		if (objectInPage != null && objectInPage instanceof By) {
 			logger.debug("Waiting for Object " + objectInPage.toString()
 					+ " for maximum of " + Integer.toString(timeOut)

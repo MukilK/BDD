@@ -1,5 +1,6 @@
 package com.mphasis.automation;
 
+import java.net.URL;
 import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
@@ -13,6 +14,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,7 +32,7 @@ public class BrowserSettings {
 
 	public enum supportedBrowsers {
 
-		CHROME, FIREFOX, IEXPLORE, HTMLUNIT, IPHONEIOS7
+		CHROME, FIREFOX, IEXPLORE, HTMLUNIT, IPHONEIOS7, REMOTEFF, REMOTECHROME
 	};
 
 	private supportedBrowsers currentBrowser;
@@ -143,6 +145,17 @@ public class BrowserSettings {
 				}
 				System.out.println("Firefox");
 				break;
+
+			case REMOTEFF:
+				driver = new RemoteWebDriver(new URL(
+						globalConfiguration.getString("grid.url")),
+						returnBrowserCapabilitiesForRemoteWebDriver("FF"));
+				break;
+			case REMOTECHROME:
+				driver = new RemoteWebDriver(new URL(
+						globalConfiguration.getString("grid.url")),
+						returnBrowserCapabilitiesForRemoteWebDriver("Chrome"));
+				break;
 			default:
 				/*
 				 * driver = new FirefoxDriver();
@@ -245,4 +258,18 @@ public class BrowserSettings {
 		}
 
 	}
+
+	private DesiredCapabilities returnBrowserCapabilitiesForRemoteWebDriver(
+			String Browser) {
+		DesiredCapabilities dc = null;
+		if (Browser.equals("FF")) {
+			dc = DesiredCapabilities.firefox();
+
+		} else if (Browser.equals("Chrome")) {
+			dc = DesiredCapabilities.chrome();
+
+		}
+		return dc;
+	}
+
 }
