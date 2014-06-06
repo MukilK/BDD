@@ -1,4 +1,4 @@
-@ff @chrome
+@ff
 Feature: A user tries to complete flexapp without filling all mandatory fields
 
   Scenario: User Fills in all fields except Type of residence field

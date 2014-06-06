@@ -1,4 +1,4 @@
-@wip
+@ff
 
 Feature: A valid user should have access to Amazon
 
