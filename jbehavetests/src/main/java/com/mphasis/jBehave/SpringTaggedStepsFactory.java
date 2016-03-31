@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.List;
 
 
-
 public class SpringTaggedStepsFactory extends SpringStepsFactory {
     private String SCREENSHOT_BEAN = "screenshots";
 
@@ -24,8 +23,8 @@ public class SpringTaggedStepsFactory extends SpringStepsFactory {
                                     ApplicationContext context, StoryReporterBuilder reporter) {
         super(configuration, context);
         this.context = context;
-        if(context.containsBean(SCREENSHOT_BEAN)) {
-         //TODO Add support for screenshot
+        if (context.containsBean(SCREENSHOT_BEAN)) {
+            //TODO Add support for screenshot
         }
 
         if (testingTags == null || testingTags.equals(""))

@@ -1,16 +1,15 @@
-
 <html xmlns:concordion="http://www.concordion.org/2007/concordion">
-<link href="../../concordion.css" rel="stylesheet" type="text/css" />
+<link href="../../concordion.css" rel="stylesheet" type="text/css"/>
 <body>
-	<h1>A valid user logging into Amazon should be granted access</h1>
-	<p>
-		<b>Given: </b>A User enters credentials UserName= <span
-			concordion:set="#userName">mukil.marthandan@mphasis.com</span> and
-		password= <span concordion:set="#password">Mphasis13</span> <br>
-		<b>When: </b>clicks on Submit<span
-			concordion:execute="logintoAmazon(#userName,#password)"> </span></br> <b>Then:
-		</b>User log in should be <span
-			concordion:assertEquals="validateUserLoggedin()">Successful</span>
-	</p>
+<h1>A valid user logging into Amazon should be granted access</h1>
+<p>
+    <b>Given: </b>A User enters credentials UserName= <span
+        concordion:set="#userName">mukil.marthandan@mphasis.com</span> and
+    password= <span concordion:set="#password">Mphasis13</span> <br>
+    <b>When: </b>clicks on Submit<span
+        concordion:execute="logintoAmazon(#userName,#password)"> </span></br> <b>Then:
+</b>User log in should be <span
+        concordion:assertEquals="validateUserLoggedin()">Successful</span>
+</p>
 </body>
 </html>

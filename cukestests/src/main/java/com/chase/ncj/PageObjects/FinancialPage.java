@@ -1,104 +1,103 @@
 package com.chase.ncj.PageObjects;
 
-import java.util.List;
-
+import com.mphasis.automation.GlobalInit;
 import org.openqa.selenium.By;
 
-import com.mphasis.automation.GlobalInit;
+import java.util.List;
 
 public class FinancialPage extends GlobalInit {
 
-	private By bdyPage = By.tagName("body");
-	private By chkChecking = By.xpath("//label[@for='checking-checkbox']/div");
-	private By chkSavings = By.xpath("//label[@for='savings-checkbox']/div");
-	private By lstHousingType = By.id("sHousingType");
-	private By txtAnnualIncome = By.id("sAnnualIncome");
-	private By lstIncomeSource = By.id("sPosition");
-	private By txtEmployer = By.id("sEmployerOpt");
-	private By btnBack = By.id("back1");
-	private By btnNext = By.id("next2");
-	private By lblErrorIncompleteFields= By.cssSelector("#step2 > div.jpui-col-lg-12.jpui-col-med-10.jputil-med-push-1.jpui-col-sm-10.jputil-sm-push-1.jpui-col-xs-12.jputil-xs-half-grid-padding > div > div.error-message-panel.jpui-col-lg-8.jputil-lg-push-2.jpui-col-med-11.jputil-med-push-1.jpui-col-sm-12.jputil-sm-push-0.jpui-col-xs-12.jputil-xs-push-0 > span");
+    private By bdyPage = By.tagName("body");
+    private By chkChecking = By.xpath("//label[@for='checking-checkbox']/div");
+    private By chkSavings = By.xpath("//label[@for='savings-checkbox']/div");
+    private By lstHousingType = By.id("sHousingType");
+    private By txtAnnualIncome = By.id("sAnnualIncome");
+    private By lstIncomeSource = By.id("sPosition");
+    private By txtEmployer = By.id("sEmployerOpt");
+    private By btnBack = By.id("back1");
+    private By btnNext = By.id("next2");
+    private By lblErrorIncompleteFields = By.cssSelector("#step2 > div.jpui-col-lg-12.jpui-col-med-10.jputil-med-push-1.jpui-col-sm-10.jputil-sm-push-1.jpui-col-xs-12.jputil-xs-half-grid-padding > div > div.error-message-panel.jpui-col-lg-8.jputil-lg-push-2.jpui-col-med-11.jputil-med-push-1.jpui-col-sm-12.jputil-sm-push-0.jpui-col-xs-12.jputil-xs-push-0 > span");
 
-	public boolean isOnFinancePage(String txtHeader) {
-		
+    public boolean isOnFinancePage(String txtHeader) {
 
-		if (execEngine.getText(bdyPage).contains(txtHeader)) {
-			return true;
-		}else{
-			return false;
-		}
-		
-	}
 
-	public void fillAnnualIncome(String income) {
+        if (execEngine.getText(bdyPage).contains(txtHeader)) {
+            return true;
+        } else {
+            return false;
+        }
 
-		execEngine.sendText(txtAnnualIncome, income);
+    }
 
-	}
-	
-	public String getAnnualIncome() {
+    public void fillAnnualIncome(String income) {
 
-		return execEngine.getAttribute(txtAnnualIncome,"value");
+        execEngine.sendText(txtAnnualIncome, income);
 
-	}
+    }
 
-	public void selectResidenceType(String residenceType) {
+    public String getAnnualIncome() {
 
-		execEngine.selectFromList(lstHousingType, residenceType);
+        return execEngine.getAttribute(txtAnnualIncome, "value");
 
-	}
-	
-	public void selectSourceOfIncome(String incomeSource) {
+    }
 
-		execEngine.selectFromList(lstIncomeSource, incomeSource);
+    public void selectResidenceType(String residenceType) {
 
-	}
-	
-	public String getSourceOfIncome() {
+        execEngine.selectFromList(lstHousingType, residenceType);
 
-		
-		return execEngine.getAttribute(lstIncomeSource,"value");
+    }
 
-	}
-	
-	public void fillEmployerInfo(String employerName) {
+    public void selectSourceOfIncome(String incomeSource) {
 
-		execEngine.sendText(txtEmployer, employerName);
+        execEngine.selectFromList(lstIncomeSource, incomeSource);
 
-	}
-	
-	public String  getEmployerInfo() {
+    }
 
-		
-		return execEngine.getAttribute(txtEmployer,"value");
+    public String getSourceOfIncome() {
 
-	}
 
-	public void submitFinanceDetails() {
+        return execEngine.getAttribute(lstIncomeSource, "value");
 
-		execEngine.click(btnNext);
+    }
 
-	}
-	
-	public String getValueInTypeOfResidence() {
+    public void fillEmployerInfo(String employerName) {
 
-		return execEngine.getSelectedValueFromDropDown(lstHousingType);
+        execEngine.sendText(txtEmployer, employerName);
 
-	}
-	
-	public void clickHousingType() {
+    }
 
-		execEngine.click(lstHousingType);
+    public String getEmployerInfo() {
 
-	}
-	
-	public List<String> getAllHousingTypeOptions(){
-		return execEngine.returnListItems(lstHousingType);
-	}
-	
-	public String getErrorMsgIncompleteFields() {
 
-		return execEngine.getText(lblErrorIncompleteFields);
+        return execEngine.getAttribute(txtEmployer, "value");
 
-	}
+    }
+
+    public void submitFinanceDetails() {
+
+        execEngine.click(btnNext);
+
+    }
+
+    public String getValueInTypeOfResidence() {
+
+        return execEngine.getSelectedValueFromDropDown(lstHousingType);
+
+    }
+
+    public void clickHousingType() {
+
+        execEngine.click(lstHousingType);
+
+    }
+
+    public List<String> getAllHousingTypeOptions() {
+        return execEngine.returnListItems(lstHousingType);
+    }
+
+    public String getErrorMsgIncompleteFields() {
+
+        return execEngine.getText(lblErrorIncompleteFields);
+
+    }
 }
