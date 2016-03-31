@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/cukestests/MTAFCukesTests.iml" filepath="$PROJECT_DIR$/cukestests/MTAFCukesTests.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jbehavetests/MTAFjBehaveTests.iml" filepath="$PROJECT_DIR$/jbehavetests/MTAFjBehaveTests.iml" />
+      <module fileurl="file://$PROJECT_DIR$/concordiontests/mtafconcordiontests.iml" filepath="$PROJECT_DIR$/concordiontests/mtafconcordiontests.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/matfcore.iml" filepath="$PROJECT_DIR$/matfcore.iml" />
+    </modules>
+  </component>
+</project>
