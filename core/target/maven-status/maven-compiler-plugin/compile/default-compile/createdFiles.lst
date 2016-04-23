@@ -1,0 +1,6 @@
+com\mphasis\automation\exceptions\UnsupportedBrowserDimension.class
+com\mphasis\automation\GlobalInit.class
+com\mphasis\automation\VerificationFunctions.class
+com\mphasis\automation\MTAFTestSetup.class
+com\mphasis\automation\BrowserSettings$1.class
+com\mphasis\automation\MTAFCore$1.class

@@ -13,8 +13,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.mphasis.automation</groupId>
-            <artifactId>MTAF</artifactId>
+            <groupId>com.framework</groupId>
+            <artifactId>core</artifactId>
             <version>0.0.1</version>
         </dependency>
         <dependency>
